@@ -17,8 +17,33 @@ Workflow on muunneltava automatisoitu prosessi, joka voi sisältää yhden tai u
 
 ## Action
 
-Actioneita voidaan käyttää suorittamaan monimutkaisempia, useasti toistettavia töitä. Nämä toimivat hieman kuin funktiot koodissa ja niitä hyödyntämällä voidaan vähentää tarvittavan koodin määrää workflow -tiedostoissa. Actioneita voidaan luoda itse, mutta myös valmiiksi luotuja actioneita eri tarpeisiin on saatavilla mm. Github Markeplacesta.
+Actioneita voidaan käyttää suorittamaan monimutkaisempia, useasti toistettavia töitä. Nämä toimivat hieman kuin funktiot koodissa ja niitä hyödyntämällä voidaan vähentää tarvittavan koodin määrää workflow -tiedostoissa. Actioneita voidaan luoda itse, mutta myös valmiiksi luotuja actioneita eri tarpeisiin on saatavilla mm. Github Markeplacesta. Actionit tarvitsevat oman metadata -tiedoston, johon on määritelty inputit, outputit sekä entrypoint
 
 ## Runner
 
 Runner on palvelin jolla workflow:ita ajetaan. Runner voi ajaa yhtä työtä kerrallaan. Runnerina voi käyttää Githubin tarjoamia palvelimia tai vaihtoehtoisesti käyttäjä voi hostata myös oman runnerin, mikäli tarvitaan jotain tiettyä käyttöjärjestelmä & hardware kokoonpanoa. Github tarjoaa käytettäväksi runnereita Ubuntu Linux, Microsoft Windows sekä macOS käyttöjärjestelmillä varustettuna.
+
+
+## Esimerkki Workflow -tiedosto
+
+```
+name: Node Continuous Integration
+
+on:
+  pull_request:
+    branches: [ main ]
+
+
+jobs:
+  test_pull_request:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - run: npm ci
+      - run: npm test
+      - run: npm run build
+```
+Tässä kyseisessä workflow:ssa ajetaan pull requestin yhteydessä yksi työ, joka sisältää askeleet, joissa ajetaan testit sekä buildataan.
