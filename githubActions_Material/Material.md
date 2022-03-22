@@ -50,7 +50,7 @@ jobs:
 ```
 `name:` tähän tulee workflown nimi<br/>
 `on:` -osio koodista on triggeri, johon määritellään tapahtuma jonka yhteydessä workflow käynnistetään. Tässä esimerkissä workflow käynnistyy pull requestin yhteydessä.<br/>
-`jobs:` on taulukko johon määritellään kaikki workflown sisältämät työt. Ensimmäisenä annetaan työn nimi, joka on tässä esimerkissä `test_pull_request`.<br/>
+`jobs:` on taulukko johon määritellään kaikki workflown sisältämät työt. Ensimmäisenä annetaan työn nimi, joka on tässä esimerkissä "test_pull_request".<br/>
   `runs-on:` määrittelee runnerin käyttöjärjestelmän<br/>
   `steps:` sisältää työn askeleet:<br/>
     `uses:` tähän määritellään työssä käytetyt actionit. Tässä esimerkissä on käytetty kahta actionia `checkout` ja `setup-node`. `with:` -osiossa Setup-nodelle on vielä annettu se node-versio jolle setup ajetaan.<br/>
@@ -61,7 +61,9 @@ jobs:
 
 ## Action
 
-Actioneita voidaan käyttää suorittamaan monimutkaisempia, useasti toistettavia töitä. Nämä toimivat hieman kuin funktiot koodissa ja niitä hyödyntämällä voidaan vähentää tarvittavan koodin määrää workflow -tiedostoissa. Actioneita voidaan luoda itse, mutta myös valmiiksi luotuja actioneita eri tarpeisiin on saatavilla mm. Github Markeplacesta. Actionit tarvitsevat oman metadata -tiedoston, johon on määritelty inputit, outputit sekä entrypoint
+Actioneita voidaan käyttää suorittamaan monimutkaisempia, useasti toistettavia töitä. Nämä toimivat hieman kuin funktiot koodissa ja niitä hyödyntämällä voidaan vähentää tarvittavan koodin määrää workflow -tiedostoissa. Actionit tarvitsevat oman metadata -tiedoston, johon on määritelty inputit, outputit sekä entrypoint
+
+Actioneita voidaan luoda itse, mutta myös valmiiksi luotuja actioneita eri tarpeisiin on saatavilla mm. Github Markeplacesta (usein ilmaiseksi). Valmiit ratkaisut voivat olla actioneita tai asennettavia sovelluksia. Asennettavissa sovelluksissa on se etu, että niitä voidaan käyttää useamman repositorion kanssa yhtäaikaisesti.
 
 ## Runner
 
