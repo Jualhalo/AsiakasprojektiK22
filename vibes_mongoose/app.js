@@ -9,6 +9,7 @@ require('dotenv').config();
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+const vibesRouter = require('./routes/vibes');
 const studentsRouter = require('./routes/students');
 
 const app = express();
@@ -46,6 +47,7 @@ app.use(cors());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/vibes', vibesRouter);
 app.use('/students', studentsRouter);
 
 
