@@ -3,11 +3,12 @@
 Github actions on jatkuvan integraation ja jatkuvan toimituksen alusta, jonka avulla ohjelmiston testaaminen, buildaaminen sekä julkaiseminen voidaan automatisoida. Github actionsin avulla voidaan luoda työnkulkuja (workflow), joita ajetaan erilaisten tapahtumien (events) yhteydessä. 
 
 Tämä video käy hyvin läpi Github actionsin perusteet, sekä sisältää muutamia hyviä käytännön esimerkkejä:
+
 https://www.youtube.com/watch?v=eB0nUzAI7M8
 
 ## Events
 
-Tapahtumat ovat tietynlaisia toimintoja Github repositoriossa, jotka laukaisevat workflow:n. Yhdessä repositoriossa voi olla useita workfloweja, jotka kaikki suorittavat erilaisia asioita eri tapahtumien yhteydessä. Esimerkkinä tapahtumasta voi olla vaikka pull request, jonka yhteydessä voidaan suorittaa workflow, joka sisältää ohjelman yksikkötestien, sekä end-to-end testien ajamisen sekä lopulta buildaamisen. 
+Tapahtumat ovat tietynlaisia toimintoja Github repositoriossa, jotka käynnistävät workflow:n. Yhdessä repositoriossa voi olla useita workfloweja, jotka kaikki suorittavat erilaisia asioita eri tapahtumien yhteydessä. Esimerkkinä tapahtumasta voi olla vaikka pull request, jonka yhteydessä voidaan suorittaa workflow, joka sisältää ohjelman yksikkötestien, sekä end-to-end testien ajamisen sekä lopulta buildaamisen. 
 
 Toisena esimerkkinä pushauksen yhteydessä voidaan suorittaa workflow, joka automaattisesti julkaisee ohjelman jossain verkkopalvelussa kuten esimerkiksi Herokussa tai Firebasessa.
 
@@ -18,6 +19,7 @@ Kaikkea ei tarvitse myöskään tehdä itse, vaan monia toimintoja varten on use
 Workfloweja voidaan myös ajaa ajoitettuina taustaprosesseina. Esimerkiksi voidaan luoda workflow, joka tekee automaattisesti tietokannasta varmuuskopioinnit tiettyyn kellonaikaan päivittäin. Tapahtuma tässä olisi siis tietyn kellon ajan saavuttaminen.
 
 Täysi lista erilaisista mahdollisista tapahtumista löytyy linkistä:
+
 https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows
 
 ## Workflow
