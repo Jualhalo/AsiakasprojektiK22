@@ -46,16 +46,16 @@ jobs:
       - run: npm test
       - run: npm run build
 ```
-`name:` tähän tulee workflown nimi
-`on:` -osio koodista on triggeri, johon määritellään tapahtuma jonka yhteydessä workflow käynnistetään. Tässä esimerkissä workflow käynnistyy pull requestin yhteydessä.
-`jobs:` on taulukko johon määritellään kaikki workflown sisältämät työt. Ensimmäisenä annetaan työn nimi, joka on tässä esimerkissä `test_pull_request`.
-  `runs-on:` määrittelee runnerin käyttöjärjestelmän
-  `steps:` sisältää työn askeleet:
-    `uses:` tähän määritellään työssä käytetyt actionit. Tässä esimerkissä on käytetty kahta actionia `checkout` ja `setup-node`. `with:` -osiossa Setup-nodelle on vielä     annettu se node-versio jolle setup ajetaan.
-    `run:` määrittellee ajettavat shell-komennot. Tässä esimerkissä ajetaan seuraavat kommenot: 
-      `npm ci` asentaa projektin tarvitsemat riippuvaisuudet.
-      `npm test` käynnistää testit
-      `npm run build` buildaa projektin
+`name:` tähän tulee workflown nimi<br/>
+`on:` -osio koodista on triggeri, johon määritellään tapahtuma jonka yhteydessä workflow käynnistetään. Tässä esimerkissä workflow käynnistyy pull requestin yhteydessä.<br/>
+`jobs:` on taulukko johon määritellään kaikki workflown sisältämät työt. Ensimmäisenä annetaan työn nimi, joka on tässä esimerkissä `test_pull_request`.<br/>
+  `runs-on:` määrittelee runnerin käyttöjärjestelmän<br/>
+  `steps:` sisältää työn askeleet:<br/>
+    `uses:` tähän määritellään työssä käytetyt actionit. Tässä esimerkissä on käytetty kahta actionia `checkout` ja `setup-node`. `with:` -osiossa Setup-nodelle on vielä annettu se node-versio jolle setup ajetaan.<br/>
+    `run:` määrittellee ajettavat shell-komennot. Tässä esimerkissä ajetaan seuraavat kommenot: <br/>
+      `npm ci` asentaa projektin tarvitsemat riippuvaisuudet.<br/>
+      `npm test` käynnistää testit<br/>
+      `npm run build` buildaa projektin<br/>
 
 ## Action
 
