@@ -10,22 +10,20 @@ require('dotenv').config();
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const vibesRouter = require('./routes/vibes');
-const studentsRouter = require('./routes/students');
 
 const app = express();
 
 mongoose.connect(process.env.DB_CONN, {
-    useCreateIndex: true,
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useFindAndModify: true,
+  useCreateIndex: true,
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useFindAndModify: true,
 }, (err) => {
-    if (err) {
-        console.log('Yhteys ei toimi, tuli virhe' + err);
-    }
-    else {
-        console.log('Yhteys kantaan toimii');
-    }
+  if (err) {
+    console.log('Yhteys ei toimi, tuli virhe' + err);
+  } else {
+    console.log('Yhteys kantaan toimii');
+  }
 });
 
 
@@ -39,7 +37,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// cors sallii resurssien jaon kahden eri palvelimilla sijaitsevan 
+// cors sallii resurssien jaon kahden eri palvelimilla sijaitsevan
 // sovelluksen kesken
 // yksinkertaisin tapa ottaa cors käyttöön kaikille reiteille
 // on mahdollista tehdä myös rajoituksia siihen mitä reittejä saa käyttää
@@ -48,7 +46,6 @@ app.use(cors());
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/vibes', vibesRouter);
-app.use('/students', studentsRouter);
 
 
 // catch 404 and forward to error handler
