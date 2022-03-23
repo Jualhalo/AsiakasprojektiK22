@@ -16,8 +16,6 @@ function createToken(user) {
   const token = jwt.sign(payload, process.env.SECRET, {
     expiresIn: 60 * 60 * 24, // expiroituu 24 tunnissa
   });
-    // const decodedtoken = jwt.decode(token);
-    // console.log(decodedtoken);
   return token;
 }
 
