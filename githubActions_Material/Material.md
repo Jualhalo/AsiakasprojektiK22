@@ -1,6 +1,6 @@
 # Github Actions
 
-Github actions on jatkuvan integraation ja jatkuvan toimituksen alusta, jonka avulla ohjelmiston testaaminen, buildaaminen sekä julkaiseminen voidaan automatisoida. Github actionsin avulla voidaan luoda työnkulkuja (workflow), joita ajetaan erilaisten tapahtumien (events) yhteydessä. 
+Github actions on jatkuvan integraation sekä jatkuvan toimituksen alusta, jonka avulla ohjelmiston testaaminen, buildaaminen sekä julkaiseminen voidaan automatisoida. Github actionsin avulla voidaan luoda työnkulkuja (workflow), joita ajetaan erilaisten tapahtumien (events) yhteydessä. 
 
 Tämä video käy hyvin läpi Github actionsin perusteet, sekä sisältää muutamia hyviä käytännön esimerkkejä:
 
@@ -14,8 +14,6 @@ Toisena esimerkkinä pushauksen yhteydessä voidaan suorittaa workflow, joka aut
 
 Kaikkien workflowien tapahtumien ei myöskään tarvitse liittyä DevOpsiin, vaan niitä voidaan liittää myös toisenlaisiin tapahtumiin. Yhtenä esimerkkinä pull requestin yhteydessä uudelle käyttäjälle voidaan antaa tervetuloa -viesti. Tai vaikka uuden issuen postaamisen yhteydessä devaajalle voidaan lähettää e-mail viesti tai discord tai slack -notifikaatio. 
 
-Kaikkea ei tarvitse myöskään tehdä itse, vaan monia toimintoja varten on usein olemassa myös valmis ratkaisu, joka on saatavilla mm. Github Marketplacesta (usein ilmaiseksi). Nämä valmiit ratkaisut voivat olla workflown yhteydessä ajettavia toimenpiteitä (actions) tai asennettavia sovelluksia. Asennettavissa sovelluksissa on se etu, että niitä voidaan käyttää useamman repositorion kanssa yhtäaikaisesti.
-
 Workfloweja voidaan myös ajaa ajoitettuina taustaprosesseina. Esimerkiksi voidaan luoda workflow, joka tekee automaattisesti tietokannasta varmuuskopioinnit tiettyyn kellonaikaan päivittäin. Tapahtuma tässä olisi siis tietyn kellon ajan saavuttaminen.
 
 Täysi lista erilaisista mahdollisista tapahtumista löytyy linkistä:
@@ -24,7 +22,11 @@ https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows
 
 ## Workflow
 
-Workflow on muunneltava automatisoitu prosessi, joka voi sisältää yhden tai useamman työn (jobs). Workflow:t määritellään repositoriossa olevissa YAML tiedostoissa. Workflown sisältämät työt ovat kokoelmia askelia (steps), joita ajetaan järjestyksessä. Jokainen työ suoritetaan omalla sille tarkoitetulla virtuaalikoneella, jota kutsutaan runneriksi. Töitä voidaan suorittaa rinnakkaisesti, jos niillä ei ole riippuvuuksia toisiinsa. Jokaisen työn askeleen yhteydessä ajetaan joko shell scripti tai toimenpide (action). Github repositoriossa workflow:ien toimintaa voidaan seurata Actions -välilehdeltä. Tällä välilehdellä työn askeleet merkataan joko onnistuneeksi tai epäonnistuneeksi
+Workflow on muunneltava automatisoitu prosessi, joka voi sisältää yhden tai useamman työn (jobs). Workflown sisältämät työt ovat kokoelmia askelia (steps), joita ajetaan järjestyksessä. Jokainen työ suoritetaan omalla sille tarkoitetulla virtuaalikoneella, jota kutsutaan runneriksi. Töitä voidaan suorittaa rinnakkaisesti, jos niillä ei ole riippuvuuksia toisiinsa. Työn suorittamiselle voidaan myös asettaa jokin ehto, joka pitää täyttyä. Jokaisen työn askeleen yhteydessä ajetaan joko shell scripti tai toimenpide (action). 
+
+Github repositoriossa workflow:ien toimintaa voidaan seurata Actions -välilehdeltä, missä workflowt on visualisoitu käyttäjälle. Kun workflowta ajetaan, käyttäjä näkee suoraan jokaisen työn askeleen tuloksen.
+
+Workflow:t määritellään repositoriossa olevissa YAML tiedostoissa, jotka tallennetaan `.github/workflows` -hakemistoon. Tiedostot voi nimetä haluamillaan nimillä.
 
 ### Esimerkki Workflow -tiedosto
 
@@ -40,30 +42,32 @@ jobs:
   test_pull_request:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v2
         with:
-          node-version: 12
-      - run: npm ci
+          node-version: 16
+      - run: npm install
       - run: npm test
       - run: npm run build
 ```
-`name:` tähän tulee workflown nimi<br/>
-`on:` -osio koodista on triggeri, johon määritellään tapahtuma jonka yhteydessä workflow käynnistetään. Tässä esimerkissä workflow käynnistyy pull requestin yhteydessä.<br/>
-`jobs:` on taulukko johon määritellään kaikki workflown sisältämät työt. Ensimmäisenä annetaan työn nimi, joka on tässä esimerkissä "test_pull_request".<br/>
+`name:` määrittelee workflown nimen<br/>
+`on:` -osiossa määritellään triggeri, jonka yhteydessä workflow käynnistetään. Tässä esimerkissä workflow käynnistyy pull requestin yhteydessä.<br/>
+`jobs:` alle määritellään kaikki workflown sisältämät työt. Ensimmäisenä annetaan työn nimi, joka on tässä esimerkissä "test_pull_request".<br/>
   `runs-on:` määrittelee runnerin käyttöjärjestelmän<br/>
   `steps:` sisältää työn askeleet:<br/>
-    `uses:` tähän määritellään työssä käytetyt actionit. Tässä esimerkissä on käytetty kahta actionia `checkout` ja `setup-node`. `with:` -osiossa Setup-nodelle on vielä annettu se node-versio jolle setup ajetaan.<br/>
-    `run:` määrittellee ajettavat shell-komennot. Tässä esimerkissä ajetaan seuraavat kommenot: <br/>
-      `npm ci` asentaa projektin tarvitsemat riippuvaisuudet.<br/>
+    `uses:` -avainsanan perään määritellään työssä käytetyt actionit. Tässä esimerkissä on käytetty kahta actionia: `checkout` ja `setup-node`. `with:` -osiossa Setup-nodelle on annettu node-versio joka asennetaan.<br/>
+    `run:` -avainsana määrittellee ajettavat shell-komennot. Tässä esimerkissä ajetaan seuraavat kommenot: <br/>
+      `npm install` asentaa projektin tarvitsemat riippuvaisuudet.<br/>
       `npm test` käynnistää testit<br/>
       `npm run build` buildaa projektin<br/>
 
 ## Action
 
-Actioneita voidaan käyttää suorittamaan monimutkaisempia, useasti toistettavia töitä. Nämä toimivat hieman kuin funktiot koodissa ja niitä hyödyntämällä voidaan vähentää tarvittavan koodin määrää workflow -tiedostoissa. Actionit tarvitsevat oman metadata -tiedoston, johon on määritelty inputit, outputit sekä entrypoint
+Actioneita voidaan käyttää suorittamaan monimutkaisempia, useasti toistettavia töitä. Niitä hyödyntämällä voidaan vähentää tarvittavan koodin määrää workflow -tiedostoissa. 
+Actioneita voidaan luoda itse, mutta myös valmiiksi luotuja actioneita eri tarpeisiin on saatavilla mm. Github Markeplacesta. 
 
-Actioneita voidaan luoda itse, mutta myös valmiiksi luotuja actioneita eri tarpeisiin on saatavilla mm. Github Markeplacesta (usein ilmaiseksi). Valmiit ratkaisut voivat olla actioneita tai asennettavia sovelluksia. Asennettavissa sovelluksissa on se etu, että niitä voidaan käyttää useamman repositorion kanssa yhtäaikaisesti.
+Actioneita on mahdollista tehdä docker -konteissa ajettaviksi, tai runnerilla suoraan ajettaviksi javascript actioneiksi. On myös mahdollista tehdä actioneita, jotka yhdistävät useamman workflown askeleen yhdeksi askeleeksi. Näitä kutsutaan composite actioneiksi.
+Action tarvitsee metadata tiedoston, jossa sen inputit, outputit sekä konfiguraatio on määritelty. Tämä tiedosto nimetään joko `action.yaml` tai `action.yml`.
 
 ## Runner
 
