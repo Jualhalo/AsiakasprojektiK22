@@ -24,9 +24,9 @@ https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows
 
 Workflow on muunneltava automatisoitu prosessi, joka voi sisältää yhden tai useamman työn (jobs). Workflown sisältämät työt ovat kokoelmia askelia (steps), joita ajetaan järjestyksessä. Jokainen työ suoritetaan omalla sille tarkoitetulla virtuaalikoneella, jota kutsutaan runneriksi. Töitä voidaan suorittaa rinnakkaisesti, jos niillä ei ole riippuvuuksia toisiinsa. Työn suorittamiselle voidaan myös asettaa jokin ehto, joka pitää täyttyä. Jokaisen työn askeleen yhteydessä ajetaan joko shell scripti tai toimenpide (action). 
 
-Github repositoriossa workflow:ien toimintaa voidaan seurata Actions -välilehdeltä, missä workflowt on visualisoitu käyttäjälle. Kun workflowta ajetaan, käyttäjä näkee suoraan jokaisen työn askeleen tuloksen.
+Github repositoriossa workflow:ien toimintaa voidaan seurata Actions -välilehdeltä, missä workflowt on visualisoitu käyttäjälle. Kun workflowta ajetaan, käyttäjä näkee välilehdeltä jokaisen työn askeleen tuloksen.
 
-Workflow:t määritellään repositoriossa olevissa YAML tiedostoissa, jotka tallennetaan `.github/workflows` -hakemistoon. Tiedostot voi nimetä haluamillaan nimillä.
+Workflow:t määritellään repositoriossa olevissa YAML tiedostoissa, jotka tallennetaan `.github/workflows` -hakemistoon repositorioissa. Tiedostot voi nimetä haluamillaan nimillä.
 
 ### Esimerkki Workflow -tiedosto
 
