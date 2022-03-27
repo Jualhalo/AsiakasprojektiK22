@@ -1,2 +1,4 @@
-A student database backend app created for a web app development course in JAMK University of Applied Sciences.
+Backend for Vibes app (mongoDB node.js driver ver.)
+
+Work in progress
 
