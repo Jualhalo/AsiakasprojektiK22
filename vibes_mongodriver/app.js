@@ -16,7 +16,6 @@ const app = express();
 
 
 //yritetään ottaa yhteys kantaan
-
 dbo.connectToServer((err) => {
   if (err) {
     console.log('Yhteys ei toimi, tuli virhe: ' + err);
@@ -24,44 +23,6 @@ dbo.connectToServer((err) => {
     console.log('Yhteys kantaan toimii');
   }
 });
-/*
-const connect = async () => {
-  const client = new MongoClient(process.env.DB_CONN, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  });
-  try {
-    await client.connect();
-    const db = client.db();
-    console.log('Yhteys kantaan toimii');
-
-    const users = db.collection('users');
-    const vibes = db.collection('vibes');
-
-    const collections = await db.collections();
-  } catch (err) {
-    console.log('Yhteys ei toimi, tuli virhe' + err);
-  } finally {
-    await client.close();
-  }
-};
-
-connect();*/
-
-/*
-mongoose.connect(process.env.DB_CONN, {
-  useCreateIndex: true,
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useFindAndModify: true,
-}, (err) => {
-  if (err) {
-    console.log('Yhteys ei toimi, tuli virhe' + err);
-  } else {
-    console.log('Yhteys kantaan toimii');
-  }
-});
-*/
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

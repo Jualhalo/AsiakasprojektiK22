@@ -1,4 +1,3 @@
-const Vibe = require('../models/Vibe.js');
 const ObjectId = require('mongodb').ObjectID;
 const dbo = require('../conn/conn.js');
 
