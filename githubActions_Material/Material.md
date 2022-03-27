@@ -2,8 +2,7 @@
 
 Github actions on jatkuvan integraation sekä jatkuvan toimituksen alusta, jonka avulla ohjelmiston testaaminen, buildaaminen sekä julkaiseminen voidaan automatisoida. Github actionsin avulla voidaan luoda työnkulkuja (workflow), joita ajetaan erilaisten tapahtumien (events) yhteydessä. 
 
-Tämä video käy hyvin läpi Github actionsin perusteet, sekä sisältää muutamia hyviä käytännön esimerkkejä:
-
+Tämä video käy hyvin läpi Github actionsin perusteet, sekä sisältää muutamia hyviä käytännön esimerkkejä:<br/>
 https://www.youtube.com/watch?v=eB0nUzAI7M8
 
 ## Events
@@ -16,8 +15,7 @@ Kaikkien workflowien tapahtumien ei myöskään tarvitse liittyä DevOpsiin, vaa
 
 Workfloweja voidaan myös ajaa ajoitettuina taustaprosesseina. Esimerkiksi voidaan luoda workflow, joka tekee automaattisesti tietokannasta varmuuskopioinnit tiettyyn kellonaikaan päivittäin. Tapahtuma tässä olisi siis tietyn kellon ajan saavuttaminen.
 
-Täysi lista erilaisista mahdollisista tapahtumista löytyy linkistä:
-
+Täysi lista erilaisista mahdollisista tapahtumista löytyy linkistä:<br/>
 https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows
 
 ## Workflow
@@ -68,6 +66,9 @@ Actioneita voidaan luoda itse, mutta myös valmiiksi luotuja actioneita eri tarp
 
 Actioneita on mahdollista tehdä docker -konteissa ajettaviksi, tai runnerilla suoraan ajettaviksi javascript actioneiksi. On myös mahdollista tehdä actioneita, jotka yhdistävät useamman workflown askeleen yhdeksi askeleeksi. Näitä kutsutaan composite actioneiksi.
 Action tarvitsee metadata tiedoston, jossa sen inputit, outputit sekä konfiguraatio on määritelty. Tämä tiedosto nimetään joko `action.yaml` tai `action.yml`.
+
+Lisätietoa actioneiden luomisesta löytyy linkistä:<br/>
+https://docs.github.com/en/actions/creating-actions
 
 ## Runner
 
