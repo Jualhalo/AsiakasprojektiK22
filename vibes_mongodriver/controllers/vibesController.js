@@ -51,7 +51,7 @@ const vibesController = {
           res.status(400).send('Error inserting data!' + err);
         } else {
           console.log(`Added a new vibe with id ${result.insertedId}`);
-          res.status(204).send();
+          res.json(result);
         }
       });
   },
