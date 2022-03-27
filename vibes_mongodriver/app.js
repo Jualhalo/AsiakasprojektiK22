@@ -4,7 +4,6 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const dbo = require('./conn/conn.js');
-//const { MongoClient } = require('mongodb');
 const cors = require('cors');
 require('dotenv').config();
 
