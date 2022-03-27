@@ -10,7 +10,7 @@ const vibesController = {
       .find({})
       .toArray((err, result) => {
         if (err) {
-          res.status(400).send('Error fetching data! ' + err);
+          res.status(400).send(err);
         } else {
           res.json(result);
         }
@@ -25,7 +25,7 @@ const vibesController = {
       .find({ _id: ObjectId(req.params.id) })
       .toArray((err, result) => {
         if (err) {
-          res.status(400).send('Error fetching data! ' + err);
+          res.status(400).send(err);
         } else {
           res.json(result);
         }
@@ -39,18 +39,18 @@ const vibesController = {
     const vibeDocument = {
       comment: req.body.comment,
       grade: req.body.grade,
-      //username: req.decoded.username,
+      username: req.decoded.username,
       createdAt: new Date(),
       updatedAt: new Date()
     };
 
     dbConnect
       .collection('vibes')
-      .insertOne(vibeDocument, function (err, result) {
+      .insertOne(vibeDocument, (err, result) => {
         if (err) {
-          res.status(400).send('Error inserting data!' + err);
+          res.status(400).send(err);
         } else {
-          console.log(`Added a new vibe with id ${result.insertedId}`);
+          console.log(`Lisätty uusi vibe id:llä: ${result.insertedId}`);
           res.json(result);
         }
       });
@@ -63,9 +63,9 @@ const vibesController = {
       .collection('vibes')
       .deleteOne({ _id: ObjectId(req.params.id) }, (err, result) => {
         if (err) {
-          res.status(400).send('Error deleting data!: ' + err);
+          res.status(400).send(err);
         } else {
-          console.log("Vibe deleted");
+          console.log("Vibe deletoitu");
           res.json(result);
         }
       });

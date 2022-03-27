@@ -13,9 +13,9 @@ router.get('/:id', vibesc.findbyid);
 // authorize -funktio suoritetaan ennen kuin päästään kontrollerin metodiin
 
 // http://localhost:3000/vibes/
-router.post('/', vibesc.add);
+router.post('/', authorize, vibesc.add);
 
 // http://localhost:3000/vibes/5ff35a144ebe0c2a942198c2
-router.delete('/:id', vibesc.delete);
+router.delete('/:id', authorize, vibesc.delete);
 
 module.exports = router;
