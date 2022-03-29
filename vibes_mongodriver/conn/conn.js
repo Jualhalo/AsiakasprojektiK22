@@ -2,6 +2,7 @@ const { MongoClient } = require('mongodb');
 
 let dbConnection;
 
+//luodaan yhteys kantaan
 module.exports = {
     connectToServer: async (callback) => {
         const uri = process.env.DB_CONN;

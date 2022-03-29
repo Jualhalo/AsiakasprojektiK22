@@ -6,7 +6,7 @@ Backend Vibes -appia varten. Toteutettu hyödyntäen mongoDB node.js driveria.
 
 Backendin tarvitsemat riippuvaisuudet asennetaan ajamalla komento `npm install` projektin hakemiston juuressa. Backend käynnistetään hakemiston juuressa komennolla `npm start`. Oletuksena palvelin käyttää porttia 3000, mutta mikäli ympäristömuuttujaan on asetettu eri portti niin sitä käytetetään sen sijaan. Tietokannan osoite määritellään hakemiston juuressa olevassa `.env` tiedostossa.
 
-## Reitit
+## Tietokannan käyttö
 
 Kantaa voi käyttää hyödyntämällä seuraavia reittejä:
 
@@ -17,10 +17,25 @@ GET `http://localhost:3000/vibes/` Kaikkien vibien haku</br>
 GET `http://localhost:3000/vibes/:id` Tietyn viben haku id:n perusteella</br>
 DELETE `http://localhost:3000/vibes/:id` Tietyn viben poisto id:n perusteella, tämä reitti on suojattu jwt-token autentikaatiolla</br>
 
-Nämä reitit on määritelty hakemistossa `\routes\` sijaitsevissa tiedostoissa `users.js` ja `vibes.js`.
+Reitit on määritelty hakemistossa `\routes\` sijaitsevissa tiedostoissa `users.js` ja `vibes.js`.
 Reittien takana oleva toiminnallisuus on määritelty controller tiedostoissa `UserController.js` ja `vibesController`, jotka sijaitsevat `\controllers\` hakemistossa.
 Mongo driver versiossa tietueiden rakenne määritellään controller tiedostoissa, kantaan tietoa postaavien reittien toiminnallisuuden yhteydessä.
 
+### Request sisältö
+
+User POST request rakenne:
+
+`"username":`,</br>
+`"password":`,</br>
+`"isadmin":`</br>
+
+Vibe POST request rakenne:
+
+`"comment":`,</br>
+`"grade":`</br>
+
+Vibe postaukseen lisätään myös automaattisesti postaavan käyttäjän nimi `req.decoded.username` sekä aikaleima.
+Lisäksi requestiin voidaan lisätä jwt-token autentikaatiota varten.
 
 ## Käyttäjänhallinta
 
