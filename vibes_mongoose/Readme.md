@@ -33,9 +33,10 @@ Vibe POST request rakenne:
 
 `"comment":` string, max 200 merkkiä,</br>
 `"grade":` numero,</br>
+`"token":` voidaan lisätä joko request bodyyn tai headeriin
 
-Vibe postaukseen lisätään myös automaattisesti postaavan käyttäjän nimi `req.decoded.username` sekä aikaleima.
-Lisäksi requestiin voidaan lisätä jwt-token autentikaatiota varten.
+Vibe postaukseen lisätään myös automaattisesti postaavan käyttäjän nimi `req.decoded.username` sekä aikaleimat `created at` ja `updated at`.
+Lisäksi request bodyyn voidaan lisätä jwt-token autentikaatiota varten.
 Mongoose versiossa jokaisessa mallissa on mukana myös validointi, joka on määritelty `\models\` hakemistossa olevissa tiedostoissa.
 
 ## Käyttäjänhallinta

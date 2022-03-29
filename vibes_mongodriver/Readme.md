@@ -27,15 +27,16 @@ User POST request rakenne:
 
 `"username":`,</br>
 `"password":`,</br>
-`"isadmin":`</br>
+`"isadmin":` tämä annetaan rekisteröinnin yhteydessä</br>
 
 Vibe POST request rakenne:
 
 `"comment":`,</br>
 `"grade":`</br>
+`"token":` voidaan lisätä joko request bodyyn tai headeriin
 
-Vibe postaukseen lisätään myös automaattisesti postaavan käyttäjän nimi `req.decoded.username` sekä aikaleima.
-Lisäksi requestiin voidaan lisätä jwt-token autentikaatiota varten.
+Vibe postaukseen lisätään myös automaattisesti postaavan käyttäjän nimi `req.decoded.username` sekä aikaleimat `createdAt` ja `updatedAt`.
+Lisäksi request bodyyn voidaan lisätä jwt-token autentikaatiota varten.
 
 ## Käyttäjänhallinta
 
