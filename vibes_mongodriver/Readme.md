@@ -33,7 +33,7 @@ Vibe POST request rakenne:
 
 `"comment":`,</br>
 `"grade":`</br>
-`"token":` voidaan lisätä joko request bodyyn tai headeriin
+`"token":` optional, voidaan lisätä tähän tai headeriin `x-access-token` avaimen arvoksi
 
 Vibe postaukseen lisätään myös automaattisesti postaavan käyttäjän nimi `req.decoded.username` sekä aikaleimat `createdAt` ja `updatedAt`.
 Lisäksi request bodyyn voidaan lisätä jwt-token autentikaatiota varten.
