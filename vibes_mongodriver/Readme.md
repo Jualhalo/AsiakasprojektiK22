@@ -1,12 +1,12 @@
-## Vibes Mongodriver
+# Vibes Mongodriver
 
 Backend Vibes -appia varten. Toteutettu hyödyntäen mongoDB node.js driveria.
 
-# Asennus ja käynnistys
+## Asennus ja käynnistys
 
 Backendin tarvitsemat riippuvaisuudet asennetaan ajamalla komento `npm install` projektin hakemiston juuressa. Backend käynnistetään hakemiston juuressa komennolla `npm start`. Oletuksena palvelin käyttää porttia 3000, mutta mikäli ympäristömuuttujaan on asetettu eri portti niin sitä käytetetään sen sijaan. Tietokannan osoite määritellään hakemiston juuressa olevassa `.env` tiedostossa.
 
-# Reitit
+## Reitit
 
 Kantaa voi käyttää hyödyntämällä seuraavia reittejä:
 
@@ -22,6 +22,6 @@ Reittien takana oleva toiminnallisuus on määritelty controller tiedostoissa `U
 Mongo driver versiossa tietueiden rakenne määritellään controller tiedostoissa, kantaan tietoa postaavien reittien toiminnallisuuden yhteydessä.
 
 
-# Käyttäjänhallinta
+## Käyttäjänhallinta
 
 Tietyt reitit on suojattu jwt-token autentikaation taakse. Reittejä pääsee käyttämään jos requestin headeriin lisää `x-access-token` avaimen arvoksi tokenin joka ei ole virheellinen tai expiroitunut. Token voidaan vaihtoehtoisesti myös sisällyttää requestin bodyyn. Uusi token luodaan aina käyttäjän rekisteröinnin tai sisäänkirjautumisen yhteydessä `createtoken.js` -tiedostossa. Tokenit on laitettu expiroitumaan 24 tunnissa. Token tarkistetaan suojattujen reittien yhteydessä ajettavalla authorize -funktiolla, joka viittaa `verifytoken.js` -tiedostoon.
