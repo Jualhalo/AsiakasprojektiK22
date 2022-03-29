@@ -25,11 +25,11 @@ const UserController = {
 
     dbConnect
       .collection('users')
-      .insertOne(user, (err, result) => {
+      .insertOne(user, (err, user) => {
         if (err) {
           return res.status(500).send('Käyttäjän rekisteröinti epäonnistui.');
         } else {
-          const token = createToken(result); // tokenin luontimetodi
+          const token = createToken(user); // tokenin luontimetodi
           // palautetaan token JSON-muodossa
           res.json({
             success: true,
