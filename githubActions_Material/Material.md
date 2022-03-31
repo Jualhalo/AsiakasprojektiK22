@@ -2,6 +2,9 @@
 
 Github actions on jatkuvan integraation sekä jatkuvan toimituksen alusta, jonka avulla ohjelmiston testaaminen, buildaaminen sekä julkaiseminen voidaan automatisoida. Github actionsin avulla voidaan luoda työnkulkuja (workflow), joita ajetaan erilaisten tapahtumien (events) yhteydessä. 
 
+Githubin omat Github Actions -materiaalit löytyvät linkistä:<br/>
+https://docs.github.com/en/actions
+
 Tämä video käy hyvin läpi Github actionsin perusteet, sekä sisältää muutamia hyviä käytännön esimerkkejä:<br/>
 https://www.youtube.com/watch?v=eB0nUzAI7M8
 
@@ -53,11 +56,14 @@ jobs:
 `jobs:` alle määritellään kaikki workflown sisältämät työt. Ensimmäisenä annetaan työn nimi, joka on tässä esimerkissä "test_pull_request".<br/>
   `runs-on:` määrittelee runnerin käyttöjärjestelmän<br/>
   `steps:` sisältää työn askeleet:<br/>
-    `uses:` -avainsanan perään määritellään työssä käytetyt actionit. Tässä esimerkissä on käytetty kahta actionia: `checkout` ja `setup-node`. `with:` -osiossa Setup-nodelle on annettu node-versio joka asennetaan.<br/>
+    `uses:` -avainsanan perään määritellään työssä käytetyt actionit. Tässä esimerkissä on käytetty kahta actionia: `checkout` ja `setup-node`. Checkout on Github Actionsin tarvitsema action, joka täytyy olla mukana workflowssa. Setup-node ajaa noden setupin. `with:` -osiossa Setup-nodelle on annettu node-versio joka asennetaan.<br/>
     `run:` -avainsana määrittellee ajettavat shell-komennot. Tässä esimerkissä ajetaan seuraavat kommenot: <br/>
       `npm install` asentaa projektin tarvitsemat riippuvaisuudet.<br/>
       `npm test` käynnistää testit<br/>
       `npm run build` buildaa projektin<br/>
+
+Workflowien YAML syntaxista voi lukea lisää linkistä:<br/>
+https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions
 
 ## Action
 
@@ -108,7 +114,9 @@ Workflowiin voidaan lisätä uusi työ joka julkaisee projektin Herokussa, olett
 
 Ensimmäisenä tulee luoda uusi heroku-projekti. Tarvitset Github Actionsia julkaisuputken workflowia varten seuraavat tiedot: luomasi projektin nimi, email osoite joka on liitetty heroku -tunnukseesi sekä API avain, jonka löydät herokusta `Account Settings` alta.
 
-**Varoitus: Älä koskaan pasteta tietojasi workflow -tiedostoon sellaisenaan, varsinkaan jos repositoriosi on julkinen. Voit sen sijaan tallentaa tiedot turvallisesti kryptattuna github repositorioosi.** Repositoriossa polun `Settings -> Security -> Secrets -> New Repository Secret` takaa löydät lomakkeen, johon voi syöttää tietosi esimerkin mukaan: 
+**Varoitus: Älä koskaan pasteta tietojasi workflow -tiedostoon sellaisenaan, varsinkaan jos repositoriosi on julkinen. Voit sen sijaan tallentaa tiedot turvallisesti kryptattuna github repositorioosi seuraavan ohjeen mukaisesti:** 
+
+Repositoriossa polun `Settings -> Security -> Secrets -> New Repository Secret` takaa löydät lomakkeen, johon voi syöttää tietosi esimerkin mukaan: 
 
 name: `HEROKU_APP_NAME` value: heroku projektisi nimi <br/>
 name: `HEROKU_EMAIL` value: email osoite joka on liitetty heroku -tunnukseesi<br/>
