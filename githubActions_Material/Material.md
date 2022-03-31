@@ -74,5 +74,67 @@ https://docs.github.com/en/actions/creating-actions
 
 Runner on palvelin jolla workflow:ita ajetaan. Runner voi ajaa yhtä työtä kerrallaan. Runnerina voi käyttää Githubin tarjoamia palvelimia tai vaihtoehtoisesti käyttäjä voi hostata myös oman runnerin, mikäli tarvitaan jotain tiettyä käyttöjärjestelmä & hardware kokoonpanoa. Github tarjoaa käytettäväksi runnereita Ubuntu Linux, Microsoft Windows sekä macOS käyttöjärjestelmillä varustettuna.
 
+# Github actions demo
+
+Github actions workflowia voidaan kokeilla valmiilla ohjelmalla. Tätä tehtävää varten tarvitset tyhjän Github repositorion, johon voit pushata ohjelman. Git täytyy myös olla asennettuna koneella.
+Demo-ohjelman repositorio löytyy osoitteesta:<br/>
+https://github.com/Jualhalo/todoLista
+
+Tämän repositorion sisällön voi ladata painamalla repositorion tiedostoselaimen yläkulmassa olevaa vihreää `code` appia ja valitsemalla sen alta `Download ZIP`.
+Pura zippi haluamaasi hakemistoon. Projektissa oleva workflow tiedosto löytyy `.github/workflows` -polun takaa. 
+
+Voit pushata projektin omaan repositorioosi navigoimalla Git Bashissa `todoLista-main` -hakemistoon ja antamalla hakemistossa seuraavat komennot:<br/>
+
+`git init`<br/>
+`git add .`<br/>
+`git commit -m "viesti"` voit kirjoittaa tähän haluamasi commit viestin<br/>
+`git branch -M main`<br/>
+`git remote add origin https://github.com/Käyttäjätunnus/repositorio.git` URL:iin tulee käyttäjätunnuksesi sekä repositoriosi nimi<br/>
+`git push -u origin main`<br/>
+
+Projekti sisältää jo valmiin workflow tiedoston. Workflowssa on työ, joka käynnistyy main haaran push  -eventin yhteydessä. Eli kun pushasit projektin repositorioosi, workflown pitäisi käynnistyä automaattisesti. Pääset seuraamaan workflown toimintaa ja tuloksia repositoriostasi Actions -välilehdeltä. Näkymässä on listattu kaikki workflowt. Jos jokin niistä on käynnissä, sen vierellä on keltainen merkki. Klikkaamalla workflow:ta se laajentuu ja pääset näkemään kaikki sen sisältämät työt. Työtä klikattaessa sekin laajentuu ja näet listan kaikista työn askeleista. Tässä näkymässä näet myös kaikki onnistuneet/epäonnistuneet vaiheet, sekä sen vaiheen jossa workflow on kyseisellä hetkellä menossa, edelleen keltaisella merkillä merkattuna.
+
+Menikö kaikki työt workflowssa läpi onnistuneesti? Jos ei mennyt niin näet työnäkymässä punaisella merkillä merkattuna vaiheen, jossa workflow epäonnistui. Esimerkiksi jos projektissa olevista yksikkötesteistä yksi tai useampi epäonnistui, se näkyisi työnäkymässä kohdassa `Run npm test`. Epäonnistuneen vaiheen voi laajentaa, jolloin siinä näkyy mitkä testit onnistuivat ja mitkä epäonnistuivat. Jos jokin epäonnistui, mukana on myös error viesti, joka viittaa epäonnistumisen syyhyn. Tällöin koodiin tulisi tehdä korjauksia, jotta kaikki testit menevät läpi. Kun korjaukset on tehty koodiin, voidaan korjaukset pushata uudelleen antamalla seuraavat komennot Git Bashissa:
+
+`git add .`<br/>
+`git commit -m "korjaus"`<br/>
+`git push`<br/>
+
+Uudelleen pushattaessa workflowin pitäisi jälleen käynnistyä automaattisesti. Mikäli kaikki vaiheet onnistuivat, workflowin viereen tulee vihreä ok -merkki.
+
+### Automaattinen julkaiseminen Herokuun
+
+Workflowiin voidaan lisätä uusi työ joka julkaisee projektin Herokussa, olettaen että edellinen työ suoriutui onnistuneesti. Tätä osiota varten tarvitset heroku -tunnukset.
+
+Ensimmäisenä tulee luoda uusi heroku-projekti. Tarvitset Github Actionsia julkaisuputken workflowia varten seuraavat tiedot: luomasi projektin nimi, email osoite joka on liitetty heroku -tunnukseesi sekä API avain, jonka löydät herokusta `Account Settings` alta.
+
+**Varoitus: Älä koskaan pasteta tietojasi workflow -tiedostoon sellaisenaan, varsinkaan jos repositoriosi on julkinen. Voit sen sijaan tallentaa tiedot turvallisesti kryptattuna github repositorioosi.** Repositoriossa polun `Settings -> Security -> Secrets -> New Repository Secret` takaa löydät lomakkeen, johon voi syöttää tietosi esimerkin mukaan: 
+
+name: `HEROKU_APP_NAME` value: heroku projektisi nimi <br/>
+name: `HEROKU_EMAIL` value: email osoite joka on liitetty heroku -tunnukseesi<br/>
+name: `HEROKU_API_KEY`. value: API avain, jonka löydät herokusta `Account Settings` alta<br/>
+
+Kun tietosi on tallennettu `secrets`:iin, voit käyttää niitä github actionsin workflowissa viittaamalla secretin nimeen aidon tiedon sijasta.
+
+Seuraavaksi voit lisätä workflowiin uuden työn, joka hoitaa automaattisen julkaisemisen, lisäämällä seuraavan koodin `workflow.yml` -tiedoston perään:
+```
+deploy:
+    name: Automaattinen julkaisu Herokuun
+    needs: test
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - uses: akhileshns/heroku-deploy@v3.12.12
+      with: 
+        heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+        heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
+        heroku_email: ${{ secrets.HEROKU_EMAIL }}
+```
+Huomaa että töiden (jobs) sisennysten tulee olla samalla tasolla, tai workflow ei muuten käynnisty yml syntax errorin takia.
+Voit jälleen käynnistää workflowit pushaamalla tekemäsi muutokset repositorioosi. Mikäli kaikki työt onnistuivat, sovelluksen pitäisi olla julkaistuna herokuun. Huom. heroku-deploy -actionin ajossa voi mennä muutama minuutti.
+
+
+
 
 
