@@ -98,9 +98,9 @@ Voit pushata projektin omaan repositorioosi navigoimalla Git Bashissa `todoLista
 `git remote add origin https://github.com/Käyttäjätunnus/repositorio.git` URL:iin tulee käyttäjätunnuksesi sekä repositoriosi nimi<br/>
 `git push -u origin main`<br/>
 
-Projekti sisältää jo valmiin workflow tiedoston. Workflowssa on työ, joka käynnistyy main haaran push  -eventin yhteydessä. Eli kun pushasit projektin repositorioosi, workflown pitäisi käynnistyä automaattisesti. Pääset seuraamaan workflown toimintaa ja tuloksia repositoriostasi Actions -välilehdeltä. Näkymässä on listattu kaikki workflowt. Jos jokin niistä on käynnissä, sen vierellä on keltainen merkki. Klikkaamalla workflow:ta se laajentuu ja pääset näkemään kaikki sen sisältämät työt. Työtä klikattaessa sekin laajentuu ja näet listan kaikista työn askeleista. Tässä näkymässä näet myös kaikki onnistuneet/epäonnistuneet vaiheet, sekä sen vaiheen jossa workflow on kyseisellä hetkellä menossa, edelleen keltaisella merkillä merkattuna.
+Projekti sisältää jo valmiin workflow tiedoston. Workflowssa on työ, joka käynnistyy main haaran push  -eventin yhteydessä. Eli kun pushasit projektin repositorioosi, workflowin pitäisi käynnistyä automaattisesti. Pääset seuraamaan workflowin toimintaa ja tuloksia repositoriostasi Actions -välilehdeltä. Näkymässä on listattu kaikki workflowt. Jos jokin niistä on käynnissä, sen vierellä on keltainen merkki. Klikkaamalla workflow:ta se laajentuu ja pääset näkemään kaikki sen sisältämät työt. Työtä klikattaessa sekin laajentuu ja näet listan kaikista työn askeleista. Tässä näkymässä näet myös kaikki onnistuneet/epäonnistuneet vaiheet, sekä sen vaiheen jossa workflow on kyseisellä hetkellä menossa, edelleen keltaisella merkillä merkattuna.
 
-Mikäli workflow ei suoriutunut onnistuneesti, työnäkymässä on punaisella merkillä merkattuna vaihe, jossa kohtaa workflow epäonnistui. Esimerkiksi jos projektissa olevista yksikkötesteistä yksi tai useampi epäonnistui, se näkyisi työnäkymässä kohdassa `Run npm test`. Epäonnistuneen vaiheen voi laajentaa, jolloin siinä näkyy mitkä testit onnistuivat ja mitkä epäonnistuivat. Jos jokin vaihe epäonnistui, mukana on myös error viesti joka viittaa epäonnistumisen syyhyn. Tällöin koodiin tulisi tehdä korjauksia, jotta kaikki testit menevät läpi. Kun korjaukset on tehty koodiin, voidaan korjaukset pushata uudelleen antamalla seuraavat komennot Git Bashissa:
+Mikäli workflow ei suoriutunut onnistuneesti, työnäkymässä on punaisella merkillä merkattuna vaihe jossa kohtaa workflow epäonnistui. Esimerkiksi jos projektissa olevista yksikkötesteistä yksi tai useampi epäonnistui, se näkyisi työnäkymässä kohdassa `Run npm test`. Epäonnistuneen vaiheen voi laajentaa, jolloin siinä näkyy mitkä testit onnistuivat ja mitkä epäonnistuivat. Jos jokin vaihe epäonnistui, mukana on myös error viesti joka viittaa epäonnistumisen syyhyn. Tällöin koodiin tulisi tehdä korjauksia, jotta kaikki testit menevät läpi. Kun korjaukset on tehty koodiin, voidaan korjaukset pushata uudelleen antamalla seuraavat komennot Git Bashissa:
 
 `git add .`<br/>
 `git commit -m "korjaus"`<br/>
@@ -124,7 +124,7 @@ name: `HEROKU_API_KEY`. value: Herokun API avain<br/>
 
 Kun tietosi on tallennettu `secrets`:iin, voit käyttää niitä github actionsin workflowissa viittaamalla secretin nimeen aidon tiedon sijasta.
 
-Seuraavaksi voit lisätä workflowiin uuden työn, joka hoitaa automaattisen julkaisemisen, lisäämällä seuraavan koodin `workflow.yml` -tiedoston perään:
+Seuraavaksi workflowiin voidaan lisätä uusi työ, joka hoitaa automaattisen julkaisemisen, lisäämällä seuraavan koodin `workflow.yml` -tiedoston perään:
 ```
 deploy:
     name: Automaattinen julkaisu Herokuun
