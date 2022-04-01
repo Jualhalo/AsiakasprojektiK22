@@ -114,13 +114,13 @@ Workflowiin voidaan lisätä uusi työ joka julkaisee projektin Herokussa, olett
 
 Ensimmäisenä tulee luoda uusi heroku-projekti. Tarvitset Github Actionsia julkaisuputken workflowia varten seuraavat tiedot: luomasi projektin nimi, email osoite joka on liitetty heroku -tunnukseesi sekä API avain, jonka löydät herokusta `Account Settings` alta.
 
-**Varoitus: Älä koskaan pasteta tietojasi workflow -tiedostoon sellaisenaan, varsinkaan jos repositoriosi on julkinen. Voit sen sijaan tallentaa tiedot turvallisesti kryptattuna github repositorioosi seuraavan ohjeen mukaisesti:** 
+Näiden tietojen pastettaaminen sellaisenaan workflow -tiedostoon ei ole kuitenkaan järkevää. Tiedot voidaan sen sijaan tallentaa turvallisesti kryptattuna github repositorioon seuraavan ohjeen mukaisesti:
 
 Repositoriossa polun `Settings -> Security -> Secrets -> New Repository Secret` takaa löydät lomakkeen, johon voi syöttää tietosi esimerkin mukaan: 
 
-name: `HEROKU_APP_NAME` value: heroku projektisi nimi <br/>
-name: `HEROKU_EMAIL` value: email osoite joka on liitetty heroku -tunnukseesi<br/>
-name: `HEROKU_API_KEY`. value: API avain, jonka löydät herokusta `Account Settings` alta<br/>
+name: `HEROKU_APP_NAME` value: Heroku projektisi nimi <br/>
+name: `HEROKU_EMAIL` value: Heroku -tunnukseen liitetty email osoite<br/>
+name: `HEROKU_API_KEY`. value: Herokun API avain<br/>
 
 Kun tietosi on tallennettu `secrets`:iin, voit käyttää niitä github actionsin workflowissa viittaamalla secretin nimeen aidon tiedon sijasta.
 
