@@ -116,7 +116,7 @@ Ensimmäisenä tulee luoda uusi heroku-projekti. Tarvitset Github Actionsia julk
 
 Näiden tietojen pastettaaminen sellaisenaan workflow -tiedostoon ei ole kuitenkaan järkevää. Tiedot voidaan sen sijaan tallentaa turvallisesti kryptattuna github repositorioon seuraavan ohjeen mukaisesti:
 
-Repositoriossa polun `Settings -> Security -> Secrets -> New Repository Secret` takaa löydät lomakkeen, johon voi syöttää tietosi esimerkin mukaan: 
+Repositoriossa polun `Settings -> Security -> Secrets -> Actions -> New Repository Secret` takaa löydät lomakkeen, johon voi syöttää tietosi esimerkin mukaan: 
 
 name: `HEROKU_APP_NAME` value: Heroku projektisi nimi <br/>
 name: `HEROKU_EMAIL` value: Heroku -tunnukseen liitetty email osoite<br/>
